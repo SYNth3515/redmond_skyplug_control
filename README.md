@@ -13,3 +13,8 @@ Windows - https://github.com/SYNth3515/redmond_skyplug_control/releases/download
 4) Нажимаем спарить, розетка подключится к приложению.
 
 На Windows порядок идентичный, только розетку добавлять в блютуз устройства не нужно.
+
+Версия от 24.10.2026
+Telegram автора: https://t.me/SYNthes1s
+Почта: yakov-shurigin@ya.ru
+Поддержать автора: https://yoomoney.ru/to/4100119665987017/0
