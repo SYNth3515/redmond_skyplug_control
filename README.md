@@ -2,8 +2,8 @@
 Сделал потому что в новом приложении REDMOND розетки убраны, а в старой версии - не работает их настройка.
 
 Скачать:
-Android - 
-Windows - 
+Android - https://github.com/SYNth3515/redmond_skyplug_control/releases/download/24.10.2026/SkyPlugControl_Android.apk
+Windows - https://github.com/SYNth3515/redmond_skyplug_control/releases/download/24.10.2026/SkyPlugControl_Windows.exe
 
 Обращаю внимание, что при установке необходимо на этапе проверки приложения Google Безопасностью раскрыть список "Подробнее" и выбрать неприметную строку "Установить без проверки" т.к. приложение без подписи.
 Порядок работы приложения на Android:
