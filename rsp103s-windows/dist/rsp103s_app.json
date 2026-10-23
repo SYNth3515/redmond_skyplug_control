@@ -1,0 +1,11 @@
+{
+ "sockets": [
+  {
+   "id": "4967db0799394745b0ff103373de1251",
+   "name": "Розетка 1",
+   "address": "C7:42:8C:EE:CE:8C",
+   "token": "ff0929e06bcf1e49"
+  }
+ ],
+ "selected": "4967db0799394745b0ff103373de1251"
+}
