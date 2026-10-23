@@ -1,4 +1,4 @@
-('C:\\rs103s\\rsp103s-windows\\build\\RedmondSocket\\PYZ-00.pyz',
+('D:\\Repo\\redmond_skyplug_control\\rsp103s-windows\\build\\SkyPlugControl\\PYZ-00.pyz',
  [('__future__',
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\__future__.py',
@@ -781,6 +781,10 @@
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\selectors.py',
    'PYMODULE'),
+  ('shlex',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\shlex.py',
+   'PYMODULE'),
   ('shutil',
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\shutil.py',
@@ -891,6 +895,10 @@
   ('uuid',
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\uuid.py',
+   'PYMODULE'),
+  ('webbrowser',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\webbrowser.py',
    'PYMODULE'),
   ('winrt', '-', 'PYMODULE'),
   ('winrt.runtime',

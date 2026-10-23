@@ -6,9 +6,9 @@ if not errorlevel 1 set PY=py -3
 %PY% --version
 if errorlevel 1 goto nopy
 %PY% -m pip install --quiet bleak pyinstaller
-%PY% -m PyInstaller --onefile --noconsole --name RedmondSocket --collect-submodules bleak rsp103s_app.py
+%PY% -m PyInstaller --noconfirm --onefile --noconsole --name SkyPlugControl --icon skyplug.ico --add-data "skyplug.ico;." --collect-submodules bleak rsp103s_app.py
 echo.
-echo Done: dist\RedmondSocket.exe
+echo Done: dist\SkyPlugControl.exe
 pause
 goto :eof
 :nopy

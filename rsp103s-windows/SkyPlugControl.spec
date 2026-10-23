@@ -9,7 +9,7 @@ a = Analysis(
     ['rsp103s_app.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('skyplug.ico', '.')],
     hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
@@ -26,7 +26,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='RedmondSocket',
+    name='SkyPlugControl',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -39,4 +39,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['skyplug.ico'],
 )

@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -170,6 +172,7 @@ fun App() {
     var showAdd by remember { mutableStateOf(false) }
     var showAddSock by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
+    var showContacts by remember { mutableStateOf(false) }
     var menuOpen by remember { mutableStateOf(false) }
     var confirm by remember { mutableStateOf<Pair<String, () -> Unit>?>(null) }
     val mutex = remember { Mutex() }
@@ -358,7 +361,10 @@ fun App() {
             }) { Text("Удалить эту розетку из приложения") }
         }
         Text("Время в розетке хранится в UTC и не знает о переходе на зимнее/летнее время: после перехода события нужно пересоздать.", style = MaterialTheme.typography.bodySmall)
+        OutlinedButton(onClick = { showContacts = true }, modifier = Modifier.fillMaxWidth()) { Text("Контакты") }
     }
+
+    if (showContacts) ContactsDialog { showContacts = false }
 
     if (showAdd) AddDialog(selected, { showAdd = false }) { ep, type, action, rules ->
         showAdd = false
@@ -519,4 +525,36 @@ fun AddDialog(day: LocalDate, onDismiss: () -> Unit, onSave: (Long, Int, Int, In
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Отмена") } }
     )
+}
+
+@Composable
+fun ContactsDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Контакты") },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text("Версия от 24.10.2026")
+                ContactLink("Проверить обновления на GitHub", "https://github.com/SYNth3515/redmond_skyplug_control", "https://github.com/SYNth3515/redmond_skyplug_control")
+                ContactLink("Telegram автора", "https://t.me/SYNthes1s", "https://t.me/SYNthes1s")
+                ContactLink("Почта", "mailto:yakov-shurigin@ya.ru", "yakov-shurigin@ya.ru")
+                ContactLink("Поддержать автора", "https://yoomoney.ru/to/4100119665987017/0", "https://yoomoney.ru/to/4100119665987017/0")
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("Закрыть") } }
+    )
+}
+
+@Composable
+fun ContactLink(label: String, url: String, shown: String) {
+    val uri = LocalUriHandler.current
+    Column {
+        Text(label, style = MaterialTheme.typography.labelMedium)
+        Text(
+            shown,
+            color = MaterialTheme.colorScheme.primary,
+            textDecoration = TextDecoration.Underline,
+            modifier = Modifier.clickable { try { uri.openUri(url) } catch (_: Exception) {} }
+        )
+    }
 }

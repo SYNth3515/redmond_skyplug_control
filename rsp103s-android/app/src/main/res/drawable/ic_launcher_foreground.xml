@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Euro-type socket: round plate -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-27,0a27,27 0 1,1 54,0a27,27 0 1,1 -54,0" />
+    <!-- Recessed inner circle -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M54,54m-21,0a21,21 0 1,1 42,0a21,21 0 1,1 -42,0" />
+    <!-- Power pin holes -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M44.5,54m-4,0a4,4 0 1,1 8,0a4,4 0 1,1 -8,0" />
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M63.5,54m-4,0a4,4 0 1,1 8,0a4,4 0 1,1 -8,0" />
+    <!-- Earth contacts (top and bottom) -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M50,34.5h8v4h-8z" />
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M50,69.5h8v4h-8z" />
+</vector>

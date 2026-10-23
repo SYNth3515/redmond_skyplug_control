@@ -19,6 +19,7 @@ import sys
 import threading
 import time
 import uuid
+import webbrowser
 from collections import namedtuple
 from datetime import date, datetime, time as dtime, timedelta, timezone
 from pathlib import Path
@@ -34,12 +35,21 @@ SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
 RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
 TX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"
 APP_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).resolve().parent
+RES_DIR = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))   # ресурсы внутри exe или рядом со скриптом
 TOKEN_FILE = APP_DIR / "rsp103s_token.hex"
 CFG_FILE = APP_DIR / "rsp103s_app.json"
 DAYS_RU = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
 MONTHS_RU = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
              "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
 GREEN, RED = "#2E7D32", "#C62828"
+APP_NAME = "SkyPlug Control"
+CONTACTS = [
+    ("Проверить обновления на GitHub", "https://github.com/SYNth3515/redmond_skyplug_control",
+     "https://github.com/SYNth3515/redmond_skyplug_control"),
+    ("Telegram автора", "https://t.me/SYNthes1s", "https://t.me/SYNthes1s"),
+    ("Почта", "mailto:yakov-shurigin@ya.ru", "yakov-shurigin@ya.ru"),
+    ("Поддержать автора", "https://yoomoney.ru/to/4100119665987017/0", "https://yoomoney.ru/to/4100119665987017/0"),
+]
 
 # type: 0 один раз, 1 каждый день, 2 по дням недели, 3 раз в месяц; action: 3 вкл, 4 выкл
 # rules: маска дней в UTC (бит 0 = понедельник)
@@ -300,9 +310,13 @@ def hx(b):
 class App(tk.Tk if tk else object):
     def __init__(self):
         super().__init__()
-        self.title("Redmond RSP-103S")
-        self.geometry("640x920")
-        self.minsize(580, 800)
+        self.title(APP_NAME)
+        self.geometry("640x970")
+        self.minsize(580, 850)
+        try:
+            self.iconbitmap(str(RES_DIR / "skyplug.ico"))
+        except Exception:
+            pass                      # нет иконки или не Windows - не критично
         self.cfg = load_cfg()
         self.socks = load_sockets(self.cfg)
         sel = self.cfg.get("selected")
@@ -402,7 +416,7 @@ class App(tk.Tk if tk else object):
     # --- сборка окна
     def _build(self):
         pad = {"padx": 8, "pady": 3}
-        ttk.Label(self, text="Redmond RSP-103S", font=("Segoe UI", 15, "bold")).pack(anchor="w", **pad)
+        ttk.Label(self, text=APP_NAME, font=("Segoe UI", 15, "bold")).pack(anchor="w", **pad)
         self.btns = []
 
         top = ttk.Frame(self)
@@ -478,6 +492,7 @@ class App(tk.Tk if tk else object):
         ttk.Label(self, wraplength=610, foreground="#555", text=(
             "Время в розетке хранится в UTC и не знает о переходе на зимнее/летнее время: "
             "после перехода события нужно пересоздать.")).pack(anchor="w", **pad)
+        ttk.Button(self, text="Контакты", command=self.contacts_dialog).pack(fill="x", **pad)
         self.refresh_combo()
         self.load_fields()
         self.update_idletasks()
@@ -623,6 +638,26 @@ class App(tk.Tk if tk else object):
         bf.grid(row=7, column=0, columnspan=2, sticky="e", pady=4)
         ttk.Button(bf, text="Отмена", command=win.destroy).pack(side="left", padx=4)
         ttk.Button(bf, text="Добавить", command=save).pack(side="left")
+
+    def contacts_dialog(self):
+        win = tk.Toplevel(self)
+        win.title("Контакты")
+        win.transient(self)
+        win.resizable(False, False)
+        try:
+            win.iconbitmap(str(RES_DIR / "skyplug.ico"))
+        except Exception:
+            pass
+        f = ttk.Frame(win, padding=14)
+        f.pack()
+        ttk.Label(f, text="Версия от 24.10.2026").pack(anchor="w", pady=(0, 8))
+        for label, url, shown in CONTACTS:
+            ttk.Label(f, text=label, foreground="#555").pack(anchor="w", pady=(6, 0))
+            link = tk.Label(f, text=shown, fg="#1565C0", cursor="hand2", font=("Segoe UI", 10, "underline"))
+            link.pack(anchor="w")
+            link.bind("<Button-1>", lambda _e, u=url: webbrowser.open(u))
+        ttk.Button(f, text="Закрыть", command=win.destroy).pack(anchor="e", pady=(14, 0))
+        win.grab_set()
 
     # --- действия над выбранной розеткой
     def refresh(self):
